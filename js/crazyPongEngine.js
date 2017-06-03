@@ -96,14 +96,14 @@ function countdownMovement () {
 
 //START - Collision detection
         if (ballLeft > (paddleLeft - 10) && ballLeft < (paddleLeft + 60) && ballTop < 29) {
-            ballSpeedY = (Math.random() * 2) + 1;
+            ballSpeedY = (Math.random() * 2) + 1.5;
             ballTop = 29;
             flag1 = false;
             ball.style.backgroundColor = "red";
         }
         
         if (ballLeft > (paddle2Left - 10) && ballLeft < (paddle2Left + 60) && ballTop > 572) {
-            ballSpeedY = (Math.random() * 2) + 1;
+            ballSpeedY = (Math.random() * 2) + 1.5;
             paddle2Speed = (Math.random() * 2) + 1;
             ballTop = 572;
             flag1 = true;
@@ -111,7 +111,7 @@ function countdownMovement () {
         }
         
         if (ballTop > (paddle3Top - 10) && ballTop < (paddle3Top + 60) && ballLeft < 29) {
-            ballSpeedX = (Math.random() * 2) + 1;
+            ballSpeedX = (Math.random() * 2) + 1.5;
             paddle3Speed = (Math.random() * 2) + 1;
             ballLeft = 29;
             flag = false;
@@ -119,7 +119,7 @@ function countdownMovement () {
         }
         
         if (ballTop > (paddle4Top - 10) && ballTop < (paddle4Top + 60) && ballLeft > 572) {
-            ballSpeedX = (Math.random() * 2) + 1;
+            ballSpeedX = (Math.random() * 2) + 1.5;
             paddle4Speed = (Math.random() * 2) + 1;
             ballLeft = 572;
             flag = true;

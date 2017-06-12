@@ -64,6 +64,7 @@
 
 .score-container {
     display: block;
-    float: right;
+    margin-left: 620px;
+    margin-top: -220px;
     font-size: 3em;
 }

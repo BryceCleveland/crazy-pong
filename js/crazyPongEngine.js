@@ -1,4 +1,5 @@
 // START - Paddle variables
+var paddleSpeedDiff = 1;
 var paddle = document.getElementById('paddle');
 var paddleLeft = 0;
 var paddleSpeed = 2;
@@ -7,15 +8,15 @@ var paddleSpeed = 2;
 //START - Artificial paddles
 var paddle2 = document.getElementById('paddle2');
 var paddle2Left = 0;
-var paddle2Speed = 3;
+var paddle2Speed = 2;
 
 var paddle3 = document.getElementById('paddle3');
 var paddle3Top = 0;
-var paddle3Speed = 3;
+var paddle3Speed = 2;
 
 var paddle4 = document.getElementById('paddle4');
 var paddle4Top = 0;
-var paddle4Speed = 3;
+var paddle4Speed = 2;
 //END - Artificial paddles
 
 //START - Score variables
@@ -30,15 +31,49 @@ var orangeScore = 0;
 var redScore = 0;
 //END - Score variables
 
-//START - Ball variables
+//START - Ball variable
+var lastHit = 0;
 var ball = document.getElementById('ball');
 var ballLeft = 200;
 var ballTop = 200;
+var ballSpeedDiff = 1;
 var ballSpeedX = 1;
 var ballSpeedY = 1;
 var flag = true;
 var flag1 = true;
 //END - Ball variables
+
+//START - Difficulty setting
+function difficultyCheck () {
+
+    if (document.forms['difficultyForm']['difficulty'].value == "easy") {
+        ballSpeedDiff = 0.5;
+        paddleSpeedDiff = 2;
+        console.log("easy n00b");
+    } 
+
+    else if (document.forms['difficultyForm']['difficulty'].value == "medium") {
+        ballSpeedDiff = 3;
+        paddleSpeedDiff = 5;
+        console.log("medium hoe");
+    } 
+
+    else if (document.forms['difficultyForm']['difficulty'].value == "hard") {
+        ballSpeedDiff = 4;
+        paddleSpeedDiff = 7;
+        console.log("this is getting hard");
+    }
+
+    else if (document.forms['difficultyForm']['difficulty'].value == "impossible") {
+        ballSpeedDiff = 10;
+        paddleSpeedDiff = 13;
+        console.log("RIP YOU N00B");
+    } else {
+        console.log("You done broke it")
+    }
+};
+difficultyCheck();
+//END - Difficulty setting
 
 //START - Keydown array
 var keyCode = [];
@@ -96,34 +131,40 @@ function countdownMovement () {
 
 //START - Collision detection
         if (ballLeft > (paddleLeft - 10) && ballLeft < (paddleLeft + 60) && ballTop < 29) {
-            ballSpeedY = (Math.random() * 2) + 1;
+            ballSpeedY = (Math.random() * ballSpeedDiff) + (ballSpeedDiff);
             ballTop = 29;
             flag1 = false;
             ball.style.backgroundColor = "red";
+            lastHit = 1;
         }
         
         if (ballLeft > (paddle2Left - 10) && ballLeft < (paddle2Left + 60) && ballTop > 572) {
-            ballSpeedY = (Math.random() * 2) + 1;
-            paddle2Speed = (Math.random() * 2) + 1.5;
+            ballSpeedY = (Math.random() * ballSpeedDiff) + (ballSpeedDiff);
+            paddle2Speed = (Math.random() * 2) + paddle4Speed;
             ballTop = 572;
             flag1 = true;
             ball.style.backgroundColor = "blue";
+            lastHit = 2;
         }
         
         if (ballTop > (paddle3Top - 10) && ballTop < (paddle3Top + 60) && ballLeft < 29) {
-            ballSpeedX = (Math.random() * 2) + 1;
-            paddle3Speed = (Math.random() * 2) + 1.5;
+            ballSpeedX = (Math.random() * ballSpeedDiff) + (ballSpeedDiff);
+            paddle3Speed = (Math.random() * 2) + paddleSpeedDiff;
             ballLeft = 29;
             flag = false;
             ball.style.backgroundColor = "green";
+            lastHit = 3;
+            // console.log("Green hit the ball!");
         }
         
         if (ballTop > (paddle4Top - 10) && ballTop < (paddle4Top + 60) && ballLeft > 572) {
-            ballSpeedX = (Math.random() * 2) + 1;
-            paddle4Speed = (Math.random() * 2) + 1.5;
+            ballSpeedX = (Math.random() * ballSpeedDiff) + (ballSpeedDiff);
+            paddle4Speed = (Math.random() * 2) + paddleSpeedDiff;
             ballLeft = 572;
             flag = true;
             ball.style.backgroundColor = "orange";
+            lastHit = 4;
+            // console.log("Orange hit the ball!");
         }
 //END - Collision detection
 
@@ -147,24 +188,27 @@ function countdownMovement () {
         
         
 //START - When ball hits a wall
-        if (ballLeft < 5) {
-            greenScore++;
-            restart();
-        };
-        
-        if (ballLeft > 595) {
-            orangeScore++;
-            restart();
-        };
-        
-        if (ballTop < 5) {
-            redScore++;
-            restart();
-        };
-        
-        if (ballTop > 595) {
-            blueScore++;
-            restart();
+        if (ballLeft < 5 || ballLeft > 595 || ballTop < 5 || ballTop > 595) {
+
+            if (lastHit == 1) {
+                redScore++;
+                restart();
+            };
+
+            if (lastHit == 2) {
+                blueScore++;
+                restart();
+            };
+
+            if (lastHit == 3) {
+                greenScore++;
+                restart();
+            };
+
+            if (lastHit == 4) {
+                orangeScore++;
+                restart();
+            };
         };
 //END - When ball hits a wall
 
@@ -238,6 +282,12 @@ function countdownMovement () {
         red.innerHTML = redScore;
         green.innerHTML = greenScore;
 //END - Score keeping
+
+//START - Movement Speed Tracking
+        document.getElementById('orangeSpeed').innerHTML = paddle4Speed;
+        document.getElementById('blueSpeed').innerHTML = paddle2Speed;
+        document.getElementById('greenSpeed').innerHTML = paddle3Speed;
+//END - Movement Speed Tracking
 };
 
 //START - Time interval

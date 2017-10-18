@@ -1,0 +1,83 @@
+.paddle {
+    position: absolute;
+    margin-top: 10px;
+    height: 7px;
+    width: 50px;
+    background-color: red;
+}
+
+.paddle2 {
+    position: absolute;
+    margin-top: 580px;
+    height: 7px;
+    width: 50px;
+    background-color: blue;
+}
+
+.paddle3 {
+    position: absolute;
+    margin-left: 10px;
+    height: 50px;
+    width: 7px;
+    background-color: green;
+}
+
+.paddle4 {
+    position: absolute;
+    margin-left: 580px;
+    height: 50px;
+    width: 7px;
+    background-color: orange;
+}
+
+.ball-container {
+    width: 600px;
+    height: 600px;
+    border: 2px solid black;
+}
+
+.ball {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    top: 150px;
+    left: 50px;
+    background-color: black;
+}
+
+#greenScore {
+    color: green;
+}
+
+#redScore {
+    color: red;
+}
+
+#orangeScore {
+    color: orange;
+}
+
+#blueScore {
+    color: blue;
+}
+
+#orangeSpeed {
+    color: orange;
+}
+
+#blueSpeed {
+    color: blue;
+}
+
+#greenSpeed {
+    color: green;
+}
+
+.infoContainer {
+    display: block;
+    position: fixed;
+    margin-left: 650px;
+    top: 5px;
+    font-size: 2em;
+}

@@ -62,9 +62,22 @@
     color: blue;
 }
 
-.score-container {
+#orangeSpeed {
+    color: orange;
+}
+
+#blueSpeed {
+    color: blue;
+}
+
+#greenSpeed {
+    color: green;
+}
+
+.infoContainer {
     display: block;
-    margin-left: 620px;
-    margin-top: -220px;
-    font-size: 3em;
+    position: fixed;
+    margin-left: 650px;
+    top: 5px;
+    font-size: 2em;
 }
